@@ -25,6 +25,7 @@
     CCSprite *_background;
     CCPhysicsNode *_physicsWorld;
     SKScrollingNode *floor;
+    int touches;
 }
 
 // -----------------------------------------------------------------------
@@ -63,7 +64,7 @@
     
     //Create a physics world
     _physicsWorld = [CCPhysicsNode node];
-    _physicsWorld.gravity = ccp(0,-50);
+    _physicsWorld.gravity = ccp(0.0f,-500.0f);
     _physicsWorld.debugDraw = NO;
     _physicsWorld.collisionDelegate = self;
     [self addRobot];
@@ -98,7 +99,8 @@
  _robot.physicsBody = [CCPhysicsBody bodyWithRect:(CGRect){CGPointZero, _robot.contentSize} cornerRadius:0];
  _robot.physicsBody.collisionGroup = @"robotGroup";
  _robot.physicsBody.collisionType = @"robotCollision";
-    [_physicsWorld addChild:_robot z:1];
+ _robot.physicsBody.elasticity=0.0f;
+ [_physicsWorld addChild:_robot z:1];
 }
 
 -(void)addCoins:(CCTime)dt
@@ -126,7 +128,7 @@
     _missile.physicsBody.collisionGroup = @"missileGroup";
     _missile.physicsBody.collisionType = @"missileCollision";
     _missile.physicsBody.affectedByGravity=false;
-    [_physicsWorld addChild:_missile z:1];
+   // [_physicsWorld addChild:_missile z:1];
     
     int minDuration = 5;
     int maxDuration = 6;
@@ -147,12 +149,10 @@
     return YES;
 }
 
--(BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair robotCollision:(CCNode *)robot floorCollision:(CCNode *)floor
+-(BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair robotCollision:(CCSprite *)robot floorCollision:(CCSprite *)floor
 {
-    //[robot removeFromParent];
-    _robot.physicsBody.elasticity=1;
-    _floor.physicsBody.elasticity=1;
-    _floor.physicsBody.allowsRotation=NO;
+    touches=0;
+    robot.position  = ccp(self.contentSize.width/8,robot.position.y);
     return YES;
 }
 
@@ -169,6 +169,9 @@
     _floor.scaleY=0.05;
     _floor.physicsBody = [CCPhysicsBody bodyWithRect:(CGRect){CGPointZero, _floor.contentSize} cornerRadius:0];
     _floor.physicsBody.type =CCPhysicsBodyTypeStatic;
+    _floor.physicsBody.friction=0.0f;
+    _floor.physicsBody.collisionGroup = @"floorGroup";
+    _floor.physicsBody.collisionType = @"floorCollision";
     [_physicsWorld addChild:_floor z:1];
 }
 /*
@@ -219,13 +222,15 @@
 // -----------------------------------------------------------------------
 
 -(void) touchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
-    CGPoint touchLoc = [touch locationInNode:self];
-    
+ //   CGPoint touchLoc = [touch locationInNode:self];
+    touches++;
+    if(touches>=3)
+        return;
     // Log touch location
-    CCLOG(@"Move sprite to @ %@",NSStringFromCGPoint(touchLoc));
-    
+    CCLOG(@"Move sprite to %f, %f",_robot.position.x, _robot.position.y);
     // Move our sprite to touch location
-    CCActionMoveTo *actionMove = [CCActionMoveTo actionWithDuration:0.5f position: ccp(self.contentSize.width/8,50+self.contentSize.height/2)];
+    CCActionMoveTo *actionMove = [CCActionMoveTo actionWithDuration:0.3f position: ccp(_robot.position.x,_robot.position.y+80.0f)];
+    _robot.physicsBody.velocity=CGPointZero;
     [_robot runAction:actionMove];
 }
 
