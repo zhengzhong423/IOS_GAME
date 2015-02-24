@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3F0FF4AF1A9BE21B00B9A6E7 /* Robot.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F0FF4AE1A9BE21B00B9A6E7 /* Robot.m */; };
 		52ED5120193ECFB700BDBD5D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52ED511F193ECFB700BDBD5D /* QuartzCore.framework */; };
 		52ED5122193ECFB700BDBD5D /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52ED5121193ECFB700BDBD5D /* OpenGLES.framework */; };
 		52ED5124193ECFB700BDBD5D /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52ED5123193ECFB700BDBD5D /* OpenAL.framework */; };
@@ -212,6 +213,12 @@
 		52ED53C9193ECFBA00BDBD5D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 52ED53C8193ECFBA00BDBD5D /* AppDelegate.m */; };
 		52ED53CC193ECFBA00BDBD5D /* MainScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 52ED53CB193ECFBA00BDBD5D /* MainScene.m */; };
 		52ED53CF193ECFBA00BDBD5D /* IntroScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 52ED53CE193ECFBA00BDBD5D /* IntroScene.m */; };
+		A1544BB91A8E81F600E162E6 /* player_1.plist in Resources */ = {isa = PBXBuildFile; fileRef = A1544BB71A8E81F500E162E6 /* player_1.plist */; };
+		A1544BBA1A8E81F600E162E6 /* player_1.png in Resources */ = {isa = PBXBuildFile; fileRef = A1544BB81A8E81F500E162E6 /* player_1.png */; };
+		A1544BBD1A8E867A00E162E6 /* player_5.plist in Resources */ = {isa = PBXBuildFile; fileRef = A1544BBB1A8E867A00E162E6 /* player_5.plist */; };
+		A1544BBE1A8E867A00E162E6 /* player_5.png in Resources */ = {isa = PBXBuildFile; fileRef = A1544BBC1A8E867A00E162E6 /* player_5.png */; };
+		A1544BC11A8E8AAA00E162E6 /* player_2.plist in Resources */ = {isa = PBXBuildFile; fileRef = A1544BBF1A8E8AAA00E162E6 /* player_2.plist */; };
+		A1544BC21A8E8AAA00E162E6 /* player_2.png in Resources */ = {isa = PBXBuildFile; fileRef = A1544BC01A8E8AAA00E162E6 /* player_2.png */; };
 		ED1C9443194433430025BF8D /* background.jpg in Resources */ = {isa = PBXBuildFile; fileRef = ED1C9442194433430025BF8D /* background.jpg */; };
 		ED1C94451944335A0025BF8D /* floor.png in Resources */ = {isa = PBXBuildFile; fileRef = ED1C94441944335A0025BF8D /* floor.png */; };
 		ED1C9448194433650025BF8D /* missile.png in Resources */ = {isa = PBXBuildFile; fileRef = ED1C9446194433650025BF8D /* missile.png */; };
@@ -231,6 +238,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3F0FF4AD1A9BE21B00B9A6E7 /* Robot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Robot.h; path = Classes/Robot.h; sourceTree = "<group>"; };
+		3F0FF4AE1A9BE21B00B9A6E7 /* Robot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Robot.m; path = Classes/Robot.m; sourceTree = "<group>"; };
 		52ED511C193ECFB700BDBD5D /* MetaLand.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MetaLand.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		52ED511F193ECFB700BDBD5D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		52ED5121193ECFB700BDBD5D /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -659,7 +668,12 @@
 		52ED53CB193ECFBA00BDBD5D /* MainScene.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MainScene.m; path = Classes/MainScene.m; sourceTree = "<group>"; };
 		52ED53CD193ECFBA00BDBD5D /* IntroScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = IntroScene.h; path = Classes/IntroScene.h; sourceTree = "<group>"; };
 		52ED53CE193ECFBA00BDBD5D /* IntroScene.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = IntroScene.m; path = Classes/IntroScene.m; sourceTree = "<group>"; };
-		ED1C9441194432F20025BF8D /* SKPhysicsBody.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SKPhysicsBody.h; path = Classes/SKPhysicsBody.h; sourceTree = "<group>"; };
+		A1544BB71A8E81F500E162E6 /* player_1.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = player_1.plist; path = Resources/player_1.plist; sourceTree = "<group>"; };
+		A1544BB81A8E81F500E162E6 /* player_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = player_1.png; path = Resources/player_1.png; sourceTree = "<group>"; };
+		A1544BBB1A8E867A00E162E6 /* player_5.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = player_5.plist; path = Resources/player_5.plist; sourceTree = "<group>"; };
+		A1544BBC1A8E867A00E162E6 /* player_5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = player_5.png; path = Resources/player_5.png; sourceTree = "<group>"; };
+		A1544BBF1A8E8AAA00E162E6 /* player_2.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = player_2.plist; path = Resources/player_2.plist; sourceTree = "<group>"; };
+		A1544BC01A8E8AAA00E162E6 /* player_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = player_2.png; path = Resources/player_2.png; sourceTree = "<group>"; };
 		ED1C9442194433430025BF8D /* background.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = background.jpg; path = Resources/background.jpg; sourceTree = "<group>"; };
 		ED1C94441944335A0025BF8D /* floor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = floor.png; path = Resources/floor.png; sourceTree = "<group>"; };
 		ED1C9446194433650025BF8D /* missile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = missile.png; path = Resources/missile.png; sourceTree = "<group>"; };
@@ -740,6 +754,14 @@
 		52ED5138193ECFB700BDBD5D /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				A1544BBF1A8E8AAA00E162E6 /* player_2.plist */,
+				A1544BC01A8E8AAA00E162E6 /* player_2.png */,
+				A1544BBB1A8E867A00E162E6 /* player_5.plist */,
+				A1544BBC1A8E867A00E162E6 /* player_5.png */,
+				A1544BB71A8E81F500E162E6 /* player_1.plist */,
+				A1544BB81A8E81F500E162E6 /* player_1.png */,
+				52ED5141193ECFB700BDBD5D /* Icons */,
+				52ED515C193ECFB700BDBD5D /* Info.plist */,
 				ED1C9446194433650025BF8D /* missile.png */,
 				ED1C9447194433650025BF8D /* robot.png */,
 				ED1C94441944335A0025BF8D /* floor.png */,
@@ -748,10 +770,8 @@
 				52ED513B193ECFB700BDBD5D /* Default@2x.png */,
 				52ED513D193ECFB700BDBD5D /* Default-568h@2x.png */,
 				52ED513F193ECFB700BDBD5D /* Default-Landscape~ipad.png */,
-				52ED515C193ECFB700BDBD5D /* Info.plist */,
 				52ED515D193ECFB700BDBD5D /* iTunesArtwork */,
 				52ED515F193ECFB700BDBD5D /* iTunesArtwork@2x */,
-				52ED5141193ECFB700BDBD5D /* Icons */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -1560,7 +1580,8 @@
 		52ED53C6193ECFBA00BDBD5D /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				ED1C9441194432F20025BF8D /* SKPhysicsBody.h */,
+				3F0FF4AD1A9BE21B00B9A6E7 /* Robot.h */,
+				3F0FF4AE1A9BE21B00B9A6E7 /* Robot.m */,
 				52ED53C7193ECFBA00BDBD5D /* AppDelegate.h */,
 				52ED53C8193ECFBA00BDBD5D /* AppDelegate.m */,
 				52ED53CA193ECFBA00BDBD5D /* MainScene.h */,
@@ -1649,10 +1670,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A1544BBE1A8E867A00E162E6 /* player_5.png in Resources */,
 				52ED513C193ECFB700BDBD5D /* Default@2x.png in Resources */,
 				52ED514F193ECFB700BDBD5D /* Icon-120.png in Resources */,
+				A1544BBA1A8E81F600E162E6 /* player_1.png in Resources */,
 				52ED5353193ECFBA00BDBD5D /* LICENSE_CCBReader.txt in Resources */,
 				ED1C9448194433650025BF8D /* missile.png in Resources */,
+				A1544BB91A8E81F600E162E6 /* player_1.plist in Resources */,
+				A1544BC11A8E8AAA00E162E6 /* player_2.plist in Resources */,
 				52ED5145193ECFB700BDBD5D /* Icon@2x.png in Resources */,
 				52ED5157193ECFB700BDBD5D /* Icon-Small@2x.png in Resources */,
 				52ED5149193ECFB700BDBD5D /* Icon-72@2x.png in Resources */,
@@ -1672,7 +1697,9 @@
 				52ED514D193ECFB700BDBD5D /* Icon-76@2x.png in Resources */,
 				52ED53C1193ECFBA00BDBD5D /* LICENSE_Chipmunk.txt in Resources */,
 				52ED515B193ECFB700BDBD5D /* Icon-Spotlight-iOS7@2x.png in Resources */,
+				A1544BBD1A8E867A00E162E6 /* player_5.plist in Resources */,
 				52ED514B193ECFB700BDBD5D /* Icon-76.png in Resources */,
+				A1544BC21A8E8AAA00E162E6 /* player_2.png in Resources */,
 				52ED5321193ECFB900BDBD5D /* ChangeLog in Resources */,
 				ED1C94451944335A0025BF8D /* floor.png in Resources */,
 				ED1C9449194433650025BF8D /* robot.png in Resources */,
@@ -1746,6 +1773,7 @@
 				52ED53CF193ECFBA00BDBD5D /* IntroScene.m in Sources */,
 				52ED5253193ECFB800BDBD5D /* CCGLView.m in Sources */,
 				52ED5216193ECFB800BDBD5D /* CCSprite.m in Sources */,
+				3F0FF4AF1A9BE21B00B9A6E7 /* Robot.m in Sources */,
 				52ED5172193ECFB700BDBD5D /* CCActionInterval.m in Sources */,
 				52ED51E1193ECFB800BDBD5D /* CCPhysicsJoint.m in Sources */,
 				52ED51BF193ECFB800BDBD5D /* CCMotionStreak.m in Sources */,

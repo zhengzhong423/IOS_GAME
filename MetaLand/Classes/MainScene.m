@@ -10,6 +10,7 @@
 #import "MainScene.h"
 #import "IntroScene.h"
 #import "ScrollingNode.h"
+#import "Robot.h"
 //#import "SKPhysicsBody.h"
 
 
@@ -64,7 +65,7 @@
     
     //Create a physics world
     _physicsWorld = [CCPhysicsNode node];
-    _physicsWorld.gravity = ccp(0.0f,-500.0f);
+    _physicsWorld.gravity = ccp(0,-500.0f);
     _physicsWorld.debugDraw = NO;
     _physicsWorld.collisionDelegate = self;
     [self addRobot];
@@ -94,13 +95,13 @@
 -(void)addRobot
 {
  //Add robot
- _robot = [CCSprite spriteWithImageNamed:@"robot.png"];
+ //_robot = [CCSprite spriteWithImageNamed:@"robot.png"];
+ _robot = [Robot createCharacter:CHARACTER_ROBOT_RUN];
  _robot.position  = ccp(self.contentSize.width/8,self.contentSize.height/2);
  _robot.physicsBody = [CCPhysicsBody bodyWithRect:(CGRect){CGPointZero, _robot.contentSize} cornerRadius:0];
  _robot.physicsBody.collisionGroup = @"robotGroup";
  _robot.physicsBody.collisionType = @"robotCollision";
- _robot.physicsBody.elasticity=0.0f;
- [_physicsWorld addChild:_robot z:1];
+    [_physicsWorld addChild:_robot z:1];
 }
 
 -(void)addCoins:(CCTime)dt
@@ -140,11 +141,26 @@
     [_missile runAction:[CCActionSequence actionWithArray:@[actionMove,actionRemove]]];
 
 }
+//Andy.
+//to refreah the robot's state when changing its shape
+-(void)refreshRobot: (int) state
+    pos_x: (CGFloat) px
+    pos_y: (CGFloat) py
+{
+    //Change the robot's picture
+    [_robot removeFromParentAndCleanup:YES];
+    _robot = [Robot createCharacter:state];
+    _robot.position = ccp(px, py);
+    _robot.physicsBody = [CCPhysicsBody bodyWithRect:(CGRect){CGPointZero, _robot.contentSize} cornerRadius:0];
+    _robot.physicsBody.collisionGroup = @"robotGroup";
+    _robot.physicsBody.collisionType = @"robotCollision";
+    [_physicsWorld addChild:_robot z:1];
+}
+
 
 -(BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair robotCollision:(CCNode *)robot missileCollision:(CCNode *)missile
 {
     [missile removeFromParent];
-    _robot.physicsBody.allowsRotation=NO;
     [robot removeFromParent];
     return YES;
 }
@@ -152,7 +168,19 @@
 -(BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair robotCollision:(CCSprite *)robot floorCollision:(CCSprite *)floor
 {
     touches=0;
-    robot.position  = ccp(self.contentSize.width/8,robot.position.y);
+//    Change the robot's picture
+//    CGFloat px = _robot.position.x;
+//    CGFloat py = _robot.position.y;
+//    [self refreshRobot:CHARACTER_ROBOT_RUN pos_x:px pos_y:py];
+//    [_robot removeFromParentAndCleanup:YES];
+//    _robot = [Robot createCharacter:CHARACTER_ROBOT_RUN];
+//    _robot.position = ccp(px, py);
+//    _robot.physicsBody.collisionGroup = @"robotGroup";
+//    _robot.physicsBody.collisionType = @"robotCollision";
+//    _robot.physicsBody = [CCPhysicsBody bodyWithRect:(CGRect){CGPointZero, _robot.contentSize} cornerRadius:0];
+//    [_physicsWorld addChild:_robot z:1];
+
+
     return YES;
 }
 
@@ -222,17 +250,80 @@
 // -----------------------------------------------------------------------
 
 -(void) touchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
- //   CGPoint touchLoc = [touch locationInNode:self];
+    
     touches++;
-    if(touches>=3)
+    CCLOG(@"TOUCHES: %d", touches);
+    if (touches==3) {
+            CGFloat px = _robot.position.x;
+            CGFloat py = _robot.position.y;
+           [self refreshRobot:CHARACTER_ROBOT_FLY pos_x:px pos_y:py];
+            [_robot removeFromParentAndCleanup:YES];
+            _robot = [Robot createCharacter:CHARACTER_ROBOT_FLY];
+            _robot.position = ccp(px, py);
+            _robot.physicsBody.collisionGroup = @"robotGroup";
+            _robot.physicsBody.collisionType = @"robotCollision";
+            [_physicsWorld addChild:_robot z:1];
+        _robot.physicsBody.type=CCPhysicsBodyTypeStatic;
         return;
-    // Log touch location
-    CCLOG(@"Move sprite to %f, %f",_robot.position.x, _robot.position.y);
+    }
+    if(touches>3)
+        return;
+//    CGPoint touchLoc = [touch locationInNode:self];
+//    
+//    // Log touch location
+//    CCLOG(@"Move sprite to @ %@",NSStringFromCGPoint(touchLoc));
+    
+    //Change the robot's picture
+    CGFloat px = _robot.position.x;
+    CGFloat py = _robot.position.y;
     // Move our sprite to touch location
-    CCActionMoveTo *actionMove = [CCActionMoveTo actionWithDuration:0.3f position: ccp(_robot.position.x,_robot.position.y+80.0f)];
+
+    
+//   [self refreshRobot:CHARACTER_ROBOT_FLY pos_x:px pos_y:py];
+//    [_robot removeFromParentAndCleanup:YES];
+//    _robot = [Robot createCharacter:CHARACTER_ROBOT_FLY];
+//    _robot.position = ccp(px, py);
+//    _robot.physicsBody.collisionGroup = @"robotGroup";
+//    _robot.physicsBody.collisionType = @"robotCollision";
+//    [_physicsWorld addChild:_robot z:1];
+    
+    CCActionMoveTo *actionMove = [CCActionMoveTo actionWithDuration:0.3f position: ccp(px,110.0f+py)];
     _robot.physicsBody.velocity=CGPointZero;
     [_robot runAction:actionMove];
+   
+
+    
 }
+
+-(void) touchEnded:(UITouch *)touch withEvent:(UIEvent *)event{
+    if (touches==3) {
+        CGFloat px = _robot.position.x;
+        CGFloat py = _robot.position.y;
+        [self refreshRobot:CHARACTER_ROBOT_FLY pos_x:px pos_y:py];
+        [_robot removeFromParentAndCleanup:YES];
+        _robot = [Robot createCharacter:CHARACTER_ROBOT_RUN];
+        _robot.position = ccp(px, py);
+        _robot.physicsBody.collisionGroup = @"robotGroup";
+        _robot.physicsBody.collisionType = @"robotCollision";
+        [_physicsWorld addChild:_robot z:1];
+
+        _robot.physicsBody.type=CCPhysicsBodyTypeDynamic;
+        return;
+    }
+        
+//        [self refreshRobot:CHARACTER_ROBOT_FALL pos_x:px pos_y:py];
+        //Change the robot's picture
+//        [_robot removeFromParentAndCleanup:YES];
+//        _robot = [Robot createCharacter:CHARACTER_ROBOT_FALL];
+//        _robot.position = ccp(px, py);
+//        _robot.physicsBody = [CCPhysicsBody bodyWithRect:(CGRect){CGPointZero, _robot.contentSize} cornerRadius:0];
+//        _robot.physicsBody.collisionGroup = @"robotGroup";
+//        _robot.physicsBody.collisionType = @"robotCollision";
+//        [_physicsWorld addChild:_robot z:1];
+}
+
+//}
+
 
 // -----------------------------------------------------------------------
 #pragma mark - Button Callbacks

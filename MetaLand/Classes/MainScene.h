@@ -10,7 +10,7 @@
 // Importing cocos2d.h and cocos2d-ui.h, will import anything you need to start using Cocos2D v3
 #import "cocos2d.h"
 #import "cocos2d-ui.h"
-
+#import "Robot.h"
 // -----------------------------------------------------------------------
 
 /**
@@ -23,6 +23,8 @@
 + (mainScene *)scene;
 - (id)init;
 -(void) startGame;
-
+//-(void)refreshRobot: (int) state
+//              pos_x: (CGFloat) px
+//              pos_y: (CGFloat) py ;
 // -----------------------------------------------------------------------
 @end
