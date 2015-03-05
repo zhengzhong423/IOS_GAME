@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0510"
+   LastUpgradeVersion = "0600"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "52ED511B193ECFB700BDBD5D"
+               BlueprintIdentifier = "8CE84D1E1957D17200716C96"
                BuildableName = "MetaLand.app"
                BlueprintName = "MetaLand"
                ReferencedContainer = "container:MetaLand.xcodeproj">
@@ -32,7 +32,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "52ED511B193ECFB700BDBD5D"
+            BlueprintIdentifier = "8CE84D1E1957D17200716C96"
             BuildableName = "MetaLand.app"
             BlueprintName = "MetaLand"
             ReferencedContainer = "container:MetaLand.xcodeproj">
@@ -51,7 +51,7 @@
       <BuildableProductRunnable>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "52ED511B193ECFB700BDBD5D"
+            BlueprintIdentifier = "8CE84D1E1957D17200716C96"
             BuildableName = "MetaLand.app"
             BlueprintName = "MetaLand"
             ReferencedContainer = "container:MetaLand.xcodeproj">
@@ -69,7 +69,7 @@
       <BuildableProductRunnable>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "52ED511B193ECFB700BDBD5D"
+            BlueprintIdentifier = "8CE84D1E1957D17200716C96"
             BuildableName = "MetaLand.app"
             BlueprintName = "MetaLand"
             ReferencedContainer = "container:MetaLand.xcodeproj">

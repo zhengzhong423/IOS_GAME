@@ -1,0 +1,48 @@
+//
+//  Item.h
+//  MetaLand
+//
+//  Created by 崔 乘瑜 on 6/12/14.
+//  Copyright 2014 MetaLand Team. All rights reserved.
+//
+
+#import <Foundation/Foundation.h>
+#import "cocos2d.h"
+
+////////////////////////////////////////////////////////
+/////////  Base class for all items in the game  ///////
+////////////////////////////////////////////////////////
+@interface Item : CCNode {
+    int _price;
+    NSString* _description;
+    CCSprite* _itemImg;
+}
+
+@property int _price;
+@property NSString* _description;
+@property CCSprite* _itemImg;
+
+@end
+
+
+////////////////////////////////////////////////////////
+//////////////   Class for utilities   /////////////////
+////////////////////////////////////////////////////////
+@interface Utility : Item
+{
+    
+}
+@property int _quantity;
+
+@end
+
+
+////////////////////////////////////////////////////////
+/////////////    Class for equipment   /////////////////
+////////////////////////////////////////////////////////
+@interface Equipment : Item
+{
+    
+}
+@property BOOL _isPossessed;
+@end

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0510"
+   LastUpgradeVersion = "0600"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "52ED5132193ECFB700BDBD5D"
+               BlueprintIdentifier = "8CE84D371957D17200716C96"
                BuildableName = "libObjectiveChipmunk.a"
                BlueprintName = "ObjectiveChipmunk"
                ReferencedContainer = "container:MetaLand.xcodeproj">

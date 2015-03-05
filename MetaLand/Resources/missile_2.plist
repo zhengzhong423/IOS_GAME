@@ -1,278 +1,165 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
-<dict>
-	<key>frames</key>
-	<dict>
-		
-		<key>missile_2-1.png</key>
-		<dict>
-			<key>aliases</key>
-			<array>
-			
-			</array>
-			<key>spriteColorRect</key>
-			<string>{{0, 0}, {14, 20}}</string>
-			<key>spriteOffset</key>
-			<string>{0, -0}</string>
-			<key>spriteSize</key>
-			<string>{14, 20}</string>
-			<key>spriteSourceSize</key>
-			<string>{14, 20}</string>
-			<key>spriteTrimmed</key>
-			<true/>
-			<key>textureRect</key>
-			<string>{{96, 34}, {14, 20}}</string>
-			<key>textureRotated</key>
-			<false/>
-		</dict>
-		
-		<key>missile_2-10.png</key>
-		<dict>
-			<key>aliases</key>
-			<array>
-			
-			</array>
-			<key>spriteColorRect</key>
-			<string>{{0, 0}, {45, 29}}</string>
-			<key>spriteOffset</key>
-			<string>{0, -0}</string>
-			<key>spriteSize</key>
-			<string>{45, 29}</string>
-			<key>spriteSourceSize</key>
-			<string>{45, 29}</string>
-			<key>spriteTrimmed</key>
-			<true/>
-			<key>textureRect</key>
-			<string>{{0, 68}, {45, 29}}</string>
-			<key>textureRotated</key>
-			<false/>
-		</dict>
-		
-		<key>missile_2-11.png</key>
-		<dict>
-			<key>aliases</key>
-			<array>
-			
-			</array>
-			<key>spriteColorRect</key>
-			<string>{{0, 0}, {42, 31}}</string>
-			<key>spriteOffset</key>
-			<string>{0, -0}</string>
-			<key>spriteSize</key>
-			<string>{42, 31}</string>
-			<key>spriteSourceSize</key>
-			<string>{42, 31}</string>
-			<key>spriteTrimmed</key>
-			<true/>
-			<key>textureRect</key>
-			<string>{{0, 99}, {42, 31}}</string>
-			<key>textureRotated</key>
-			<false/>
-		</dict>
-		
-		<key>missile_2-2.png</key>
-		<dict>
-			<key>aliases</key>
-			<array>
-			
-			</array>
-			<key>spriteColorRect</key>
-			<string>{{0, 0}, {23, 16}}</string>
-			<key>spriteOffset</key>
-			<string>{0, -0}</string>
-			<key>spriteSize</key>
-			<string>{23, 16}</string>
-			<key>spriteSourceSize</key>
-			<string>{23, 16}</string>
-			<key>spriteTrimmed</key>
-			<true/>
-			<key>textureRect</key>
-			<string>{{82, 93}, {23, 16}}</string>
-			<key>textureRotated</key>
-			<false/>
-		</dict>
-		
-		<key>missile_2-3.png</key>
-		<dict>
-			<key>aliases</key>
-			<array>
-			
-			</array>
-			<key>spriteColorRect</key>
-			<string>{{0, 0}, {27, 24}}</string>
-			<key>spriteOffset</key>
-			<string>{0, -0}</string>
-			<key>spriteSize</key>
-			<string>{27, 24}</string>
-			<key>spriteSourceSize</key>
-			<string>{27, 24}</string>
-			<key>spriteTrimmed</key>
-			<true/>
-			<key>textureRect</key>
-			<string>{{82, 67}, {27, 24}}</string>
-			<key>textureRotated</key>
-			<false/>
-		</dict>
-		
-		<key>missile_2-4.png</key>
-		<dict>
-			<key>aliases</key>
-			<array>
-			
-			</array>
-			<key>spriteColorRect</key>
-			<string>{{0, 0}, {40, 32}}</string>
-			<key>spriteOffset</key>
-			<string>{0, -0}</string>
-			<key>spriteSize</key>
-			<string>{40, 32}</string>
-			<key>spriteSourceSize</key>
-			<string>{40, 32}</string>
-			<key>spriteTrimmed</key>
-			<true/>
-			<key>textureRect</key>
-			<string>{{49, 0}, {40, 32}}</string>
-			<key>textureRotated</key>
-			<false/>
-		</dict>
-		
-		<key>missile_2-5.png</key>
-		<dict>
-			<key>aliases</key>
-			<array>
-			
-			</array>
-			<key>spriteColorRect</key>
-			<string>{{0, 0}, {32, 32}}</string>
-			<key>spriteOffset</key>
-			<string>{0, -0}</string>
-			<key>spriteSize</key>
-			<string>{32, 32}</string>
-			<key>spriteSourceSize</key>
-			<string>{32, 32}</string>
-			<key>spriteTrimmed</key>
-			<true/>
-			<key>textureRect</key>
-			<string>{{48, 67}, {32, 32}}</string>
-			<key>textureRotated</key>
-			<false/>
-		</dict>
-		
-		<key>missile_2-6.png</key>
-		<dict>
-			<key>aliases</key>
-			<array>
-			
-			</array>
-			<key>spriteColorRect</key>
-			<string>{{0, 0}, {47, 32}}</string>
-			<key>spriteOffset</key>
-			<string>{0, -0}</string>
-			<key>spriteSize</key>
-			<string>{47, 32}</string>
-			<key>spriteSourceSize</key>
-			<string>{47, 32}</string>
-			<key>spriteTrimmed</key>
-			<true/>
-			<key>textureRect</key>
-			<string>{{0, 0}, {47, 32}}</string>
-			<key>textureRotated</key>
-			<false/>
-		</dict>
-		
-		<key>missile_2-7.png</key>
-		<dict>
-			<key>aliases</key>
-			<array>
-			
-			</array>
-			<key>spriteColorRect</key>
-			<string>{{0, 0}, {40, 32}}</string>
-			<key>spriteOffset</key>
-			<string>{0, -0}</string>
-			<key>spriteSize</key>
-			<string>{40, 32}</string>
-			<key>spriteSourceSize</key>
-			<string>{40, 32}</string>
-			<key>spriteTrimmed</key>
-			<true/>
-			<key>textureRect</key>
-			<string>{{91, 0}, {40, 32}}</string>
-			<key>textureRotated</key>
-			<false/>
-		</dict>
-		
-		<key>missile_2-8.png</key>
-		<dict>
-			<key>aliases</key>
-			<array>
-			
-			</array>
-			<key>spriteColorRect</key>
-			<string>{{0, 0}, {46, 32}}</string>
-			<key>spriteOffset</key>
-			<string>{0, -0}</string>
-			<key>spriteSize</key>
-			<string>{46, 32}</string>
-			<key>spriteSourceSize</key>
-			<string>{46, 32}</string>
-			<key>spriteTrimmed</key>
-			<true/>
-			<key>textureRect</key>
-			<string>{{0, 34}, {46, 32}}</string>
-			<key>textureRotated</key>
-			<false/>
-		</dict>
-		
-		<key>missile_2-9.png</key>
-		<dict>
-			<key>aliases</key>
-			<array>
-			
-			</array>
-			<key>spriteColorRect</key>
-			<string>{{0, 0}, {46, 31}}</string>
-			<key>spriteOffset</key>
-			<string>{0, -0}</string>
-			<key>spriteSize</key>
-			<string>{46, 31}</string>
-			<key>spriteSourceSize</key>
-			<string>{46, 31}</string>
-			<key>spriteTrimmed</key>
-			<true/>
-			<key>textureRect</key>
-			<string>{{48, 34}, {46, 31}}</string>
-			<key>textureRotated</key>
-			<false/>
-		</dict>
-		
-	</dict>
-	<key>metadata</key>
-	<dict>
-		<key>version</key>
-		<string>1.6.0</string>
-		<key>format</key>
-		<integer>3</integer>
-		<key>size</key>
-		<string>{256, 256}</string>
-		<key>name</key>
-		<string>Untitled</string>
-		<key>target</key>
-		<dict>
-			<key>name</key>
-			<string>default</string>
-			<key>textureFileName</key>
-			<string>missile_2</string>
-			<key>textureFileExtension</key>
-			<string>.png</string>
-			<key>coordinatesFileName</key>
-			<string>missile_2</string>
-			<key>coordinatesFileExtension</key>
-			<string>.plist</string>
-			<key>premultipliedAlpha</key>
-			<false/>
-		</dict>
-	</dict>
-</dict>
+    <dict>
+        <key>frames</key>
+        <dict>
+            <key>missile_2-1.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{2,77},{67,71}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{67,71}}</string>
+                <key>sourceSize</key>
+                <string>{67,71}</string>
+            </dict>
+            <key>missile_2-10.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{2,2},{67,73}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{67,73}}</string>
+                <key>sourceSize</key>
+                <string>{67,73}</string>
+            </dict>
+            <key>missile_2-11.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{71,77},{67,70}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{67,70}}</string>
+                <key>sourceSize</key>
+                <string>{67,70}</string>
+            </dict>
+            <key>missile_2-2.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{71,2},{67,73}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{67,73}}</string>
+                <key>sourceSize</key>
+                <string>{67,73}</string>
+            </dict>
+            <key>missile_2-3.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{71,77},{67,70}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{67,70}}</string>
+                <key>sourceSize</key>
+                <string>{67,70}</string>
+            </dict>
+            <key>missile_2-4.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{2,150},{67,69}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{67,69}}</string>
+                <key>sourceSize</key>
+                <string>{67,69}</string>
+            </dict>
+            <key>missile_2-5.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{2,77},{67,71}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{67,71}}</string>
+                <key>sourceSize</key>
+                <string>{67,71}</string>
+            </dict>
+            <key>missile_2-6.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{2,2},{67,73}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{67,73}}</string>
+                <key>sourceSize</key>
+                <string>{67,73}</string>
+            </dict>
+            <key>missile_2-7.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{71,77},{67,70}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{67,70}}</string>
+                <key>sourceSize</key>
+                <string>{67,70}</string>
+            </dict>
+            <key>missile_2-8.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{71,149},{67,69}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{67,69}}</string>
+                <key>sourceSize</key>
+                <string>{67,69}</string>
+            </dict>
+            <key>missile_2-9.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{2,77},{67,71}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{67,71}}</string>
+                <key>sourceSize</key>
+                <string>{67,71}</string>
+            </dict>
+        </dict>
+        <key>metadata</key>
+        <dict>
+            <key>format</key>
+            <integer>2</integer>
+            <key>realTextureFileName</key>
+            <string>missile_2.png</string>
+            <key>size</key>
+            <string>{140,221}</string>
+            <key>smartupdate</key>
+            <string>$TexturePacker:SmartUpdate:9e6bc67d5bd49758ad7b94b39f5ffc9d:c43ff20d5d5ab8ea89d1edfcfb442389:7824eb5bfc3f8b28712134f623e1dcce$</string>
+            <key>textureFileName</key>
+            <string>missile_2.png</string>
+        </dict>
+    </dict>
 </plist>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>75E7768A-6410-4130-B905-2DF925DCA083</string>
+	<key>IDESourceControlProjectName</key>
+	<string>MetaLand</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>AA15F15919C39CA3FEEBCA9372E7C247062E65EE</key>
+		<string>https://github.com/pf22099/CSCI526_Spirit.git</string>
+		<key>C7060D00CF724362DBFC2F9152BAAFA02B0D9CDB</key>
+		<string>http://triforce.usc.edu/git/scm/met/metaland.git</string>
+		<key>DDCC0558B0BBC055831BF5E1870FB2EE8969CC86</key>
+		<string>https://github.com/zhengzhong423/IOS_GAME.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>MetaLand.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>AA15F15919C39CA3FEEBCA9372E7C247062E65EE</key>
+		<string>../..</string>
+		<key>C7060D00CF724362DBFC2F9152BAAFA02B0D9CDB</key>
+		<string>../../../MetaLand</string>
+		<key>DDCC0558B0BBC055831BF5E1870FB2EE8969CC86</key>
+		<string>../../../526-master_v1.4</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/pf22099/CSCI526_Spirit.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>AA15F15919C39CA3FEEBCA9372E7C247062E65EE</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>DDCC0558B0BBC055831BF5E1870FB2EE8969CC86</string>
+			<key>IDESourceControlWCCName</key>
+			<string>526-master_v1.4</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>AA15F15919C39CA3FEEBCA9372E7C247062E65EE</string>
+			<key>IDESourceControlWCCName</key>
+			<string>CSCI526_Spirit</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>C7060D00CF724362DBFC2F9152BAAFA02B0D9CDB</string>
+			<key>IDESourceControlWCCName</key>
+			<string>MetaLand</string>
+		</dict>
+	</array>
+</dict>
+</plist>

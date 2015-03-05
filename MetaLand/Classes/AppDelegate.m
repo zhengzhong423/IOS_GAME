@@ -2,14 +2,14 @@
 //  AppDelegate.m
 //  MetaLand
 //
-//  Created by John Michael Rockmore on 6/3/14.
-//  Copyright John Michael Rockmore 2014. All rights reserved.
+//  Created by John Michael Rockmore on 6/5/14.
+//  Copyright MetaLand Team 2014. All rights reserved.
 //
 // -----------------------------------------------------------------------
 
 #import "AppDelegate.h"
 #import "IntroScene.h"
-#import "MainScene.h"
+#import "GameScene.h"
 
 @implementation AppDelegate
 
