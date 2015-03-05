@@ -70,6 +70,9 @@
     float _forceUpward;
     float _maxDownwardSpeed;
     
+    float _groundInitialY;
+    float _ceilingInitialY;
+    
     //CCButton *_buttonCoinProgressBar;
     
     CCProgressNode *_coinProgressBar;
@@ -151,6 +154,9 @@
     _distance = 0;
     _numOfCoins = 0.0f;
     
+    //Initialize ground and ceiling position
+    _groundInitialY = 20;
+    
     //[self boost];
     
     CCLabelTTF* labelDistance = [CCLabelTTF labelWithString:[NSString stringWithFormat:@"Distance: %d M", _distance] fontName:@"Verdana-Bold" fontSize:12.0f];
@@ -185,7 +191,7 @@
     // Add the buttons in the game UI
     [self addButtonPause];
     [self addButtonSoundControl];
-    
+    [self addButtonJump];
     [self addCoinProgressBar];
     
     [self generateStaticObstacles:_background._background2];
@@ -211,6 +217,10 @@
 -(void)initialScrollingBackground {
     _background = [Background node];
     
+    _groundInitialY = 20;
+    _ceilingInitialY = [_background._background1 boundingBox].size.height;
+    _background._ceiling.position = ccp(0,_ceilingInitialY);
+    
     if (_targetScene==0)
         [self addRecordSign:_background._background1];
     else if(_targetScene==1)
@@ -224,7 +234,7 @@
 // -----------------------------------------------------------------------
 -(void)addRobot {
     _robot = [Robot createCharacter:CHARACTER_ROBOT_RUN];
-    _robot.position  = ccp(self.contentSize.width/4, _background._ground.contentSize.height + _background._ground.position.y + _robot.contentSize.height / 2);
+    _robot.position  = ccp(self.contentSize.width/4, _background._ground.contentSize.height + _groundInitialY + _robot.contentSize.height / 2);
     _robot.physicsBody.allowsRotation = false;
     _robot.physicsBody.friction = 0.0f;
     [_physicsWorld addChild:_robot z:1];
@@ -232,7 +242,7 @@
 
 -(void)addRobotAfterPortal {
     _robot = [Robot createCharacter:CHARACTER_ROBOT_RUN];
-    _robot.position = ccp(self.contentSize.width/4 - _robot.contentSize.width/2 - 15, _background._ground.contentSize.height + _background._ground.position.y + _robot.contentSize.height / 2);
+    _robot.position = ccp(self.contentSize.width/4 - _robot.contentSize.width/2 - 15, _background._ground.contentSize.height + _groundInitialY + _robot.contentSize.height / 2);
     CCAction *moveOut = [CCActionMoveBy actionWithDuration:1 position:ccp(15, 0)];
     [_robot runAction:moveOut];
     if (_isShieldOn) {
@@ -365,7 +375,7 @@
     
     // Set random missile position
     int maxY = self.contentSize.height - missile.contentSize.height - _background._topBackground.contentSize.height;
-    int minY = _background._ground.position.y + _background._ground.contentSize.height+_background._ground.position.y;
+    int minY = _groundInitialY + _background._ground.contentSize.height+_groundInitialY;
     int randomY = [self random:minY withArg2:maxY];
     
     //float typeFlag = arc4random()%100/100.0f;
@@ -468,9 +478,26 @@
     }
      */
     //detect if fall down
-
+    
+    _robot.rotation=0.0f;
+    
     if(_robot.position.y < -10) {
         [self died];
+    }
+    if(!_isGameOver)
+    {
+        
+        if(_robot.position.x<self.contentSize.width/5)
+        {
+            CCAction *move = [CCActionMoveBy actionWithDuration:0.3f position:ccp(15, 0)];
+            [_robot runAction:move];
+        }
+    
+        if(_robot.position.x > self.contentSize.width/3)
+        {
+            CCAction *move = [CCActionMoveBy actionWithDuration:0.3f position:ccp(15, 0)];
+            [_robot runAction:move];
+        }
     }
     
     if (_isPortalOn) {
@@ -745,6 +772,26 @@
     return YES;
 }
 
+//colission between robot and lower ground -- to die
+-(BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair robotCollision:(CCNode *)robot hellCollision:(CCNode *)hell
+{
+    //add
+    CGFloat x = robot.position.x;
+    CGFloat y = robot.position.y;
+    [_robot removeFromParentAndCleanup:YES];
+    [self addRobotdie: x andNb: y];
+    [self died];
+    
+    return YES;
+}
+
+//colission between robot and ceiling
+-(BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair robotCollision:(CCNode *)robot ceilingCollision:(CCNode *)ceiling
+{
+    
+    return YES;
+}
+
 
 
 -(BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair robotCollision:(CCNode *)robot magnetCollision:(CCNode *)magnet{
@@ -925,7 +972,8 @@
         [_robot.physicsBody applyImpulse:ccp(0,0.1f)];
         
     }*/
-    
+    if(_isBoostOn)
+        return;
     if (!_isGameOver) {
         
         touches++;
@@ -1117,6 +1165,16 @@
 // -----------------------------------------------------------------------
 #pragma mark - Add Buttons
 // -----------------------------------------------------------------------
+-(void)addButtonJump {
+    CCSpriteFrame *jumpFrame = [CCSpriteFrame frameWithImageNamed:@"jump.png"];
+    CCButton *buttonJump = [CCButton buttonWithTitle:nil spriteFrame:jumpFrame];
+    buttonJump.positionType = CCPositionTypeNormalized;
+    buttonJump.position = ccp(0.15f, 0.15f); // Top Right of screen
+    buttonJump.name = @"buttonJump";
+//    [buttonJump setTarget:self selector:@selector(onJumpClicked:)];
+    [self addChild:buttonJump z:9];
+}
+
 -(void)addButtonPause {
     CCSpriteFrame *pauseFrame = [CCSpriteFrame frameWithImageNamed:@"pause.png"];
     CCButton *buttonPause = [CCButton buttonWithTitle:nil spriteFrame:pauseFrame];
@@ -1178,6 +1236,11 @@
 // -----------------------------------------------------------------------
 #pragma mark - Button Callbacks
 // -----------------------------------------------------------------------
+-(void)onJumpClicked:(id)sender {
+    [self jump];
+}
+
+
 -(void)onPauseClicked:(id)sender {
     // Pause the game
     self.userInteractionEnabled = NO;
@@ -1321,6 +1384,62 @@
     _magnetTime = 0;
 }
 
+-(void)jump
+{
+    if(_isBoostOn)
+        return;
+    if (!_isGameOver) {
+        
+        touches++;
+        if  (touches==2)
+        {
+            _robot.physicsBody.velocity=ccp(0.0f, 0.0f);
+            [_robot.physicsBody applyForce:ccp(0,15.0f)];
+            return;
+        }
+        if (touches==3) {
+            CGFloat px = _robot.position.x;
+            CGFloat py = _robot.position.y;
+            
+            [_robot removeFromParentAndCleanup:YES];
+            _robot = [Robot createCharacter:CHARACTER_ROBOT_FLY];
+            _robot.position = ccp(px, py);
+            _robot.physicsBody.collisionGroup = @"robotGroup";
+            _robot.physicsBody.collisionType = @"robotCollision";
+            
+            [_physicsWorld addChild:_robot z:1];
+            [self schedule:@selector(applyForceWhenTouched) interval:1.0f/10.0f];
+            return;
+        }
+        if(touches>=3)
+            return;
+        
+        //        CGFloat x = self.contentSize.width/4;
+        //        CGFloat y = _robot.position.y;
+        //        if(!_isBoostOn){
+        //            [_robot removeFromParentAndCleanup:YES];
+        //            [self addRobotJump:x andNb:y];
+        //        }else{
+        //            [_robot removeFromParentAndCleanup:YES];
+        //
+        //            [self addRobotBoost:x andNb:y];
+        //        }
+        //
+        //        if(_scrollSpeed < 6) {
+        //            [_robot.physicsBody applyImpulse:ccp(0,0.05f)];
+        //        }
+        //        else {
+        //            [_robot.physicsBody applyImpulse:ccp(0,0.1f)];
+        //        }
+        [_robot.physicsBody applyForce:ccp(0,14.0f)];
+        _robot.physicsBody.velocity=CGPointZero;
+        
+    }
+    else {
+        self.userInteractionEnabled = NO;
+    }
+
+}
 
 // -----------------------------------------------------------------------
 #pragma mark - Random number generators
@@ -1417,19 +1536,15 @@
             CGFloat x = _robot.position.x;
             CGFloat y = _robot.position.y;
             [_robot removeFromParentAndCleanup:YES];
-            if (_robot.position.y > _background._ground.position.y + _background._ground.contentSize.height + _robot.contentSize.height/2) {
-                [self addRobotJump:x andNb:y];
-            }
-            else {
-                [self addRobotBackToRun:x andNb:y];
-            }
+            [self addRobotBackToRun:x andNb:y];
+            
 //            CCAction *fadeIn = [CCActionFadeIn actionWithDuration:0.5f];
 //            CCAction *fadeOut = [CCActionFadeOut actionWithDuration:0.5f];
 //            CCAction *fadeOutBlock = [CCActionCallBlock actionWithBlock:^{
 //                _isInvulnerable = NO;
 //            }];
 //            [_robot runAction:[CCActionSequence actionWithArray:@[fadeIn, fadeOut, fadeIn, fadeOut, fadeIn, fadeOutBlock]]];
-            [self performSelector:@selector(disableInvulnerable) withObject:nil afterDelay:3.0f];
+              [self performSelector:@selector(disableInvulnerable) withObject:nil];
         }
         _robot.physicsBody.friction = 0.0f;
 
@@ -1465,7 +1580,7 @@
     for (float i = 0.0f; i<delta; i+=.1f) {
         _background._background1.position = ccp(_background._background1.position.x - .1, _background._background1.position.y);
         _background._background2.position = ccp(_background._background2.position.x - .1, _background._background2.position.y);
-        _background._ground.position = ccp(_background._ground.position.x - .1, _background._ground.position.y);
+        //_background._ground.position = ccp(_background._ground.position.x - .1, _groundInitialY);
     }
     
     if (_background._background1.position.x <= -_background._background1.contentSize.width+1) {
@@ -1671,7 +1786,7 @@
         minY = 0;
     }
     maxY -= _background._topBackground.contentSize.height;
-    minY += _background._ground.position.y + _background._ground.contentSize.height;
+    minY += _groundInitialY + _background._ground.contentSize.height;
     
     int randomY = arc4random()%(maxY-minY)+minY;
     return randomY;
@@ -1970,7 +2085,7 @@
             //[_robot runAction:comeOut];
             
             CCSprite *portalOut = [Rewards portalOutInit];
-            portalOut.position = ccp(self.contentSize.width/5 - _robot.contentSize.width/2 - portalOut.contentSize.width / 2, _background._ground.position.y + _background._ground.contentSize.height + _robot.contentSize.height / 2);
+            portalOut.position = ccp(self.contentSize.width/5 - _robot.contentSize.width/2 - portalOut.contentSize.width / 2, _groundInitialY + _background._ground.contentSize.height + _robot.contentSize.height / 2);
             portalOut.opacity = 0.5;
             [_physicsWorld addChild:portalOut];
             [_robot removeFromParentAndCleanup:YES];

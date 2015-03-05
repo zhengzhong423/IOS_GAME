@@ -10,12 +10,14 @@
 
 @interface Background : CCNode {
     CCSprite *_ground;
+    CCSprite *_ceiling;
     CCSprite *_background1;
     CCSprite *_background2;
     CCSprite *_topBackground;
 }
 
 @property (atomic) CCSprite *_ground;
+@property (atomic) CCSprite *_ceiling;
 @property (atomic) CCSprite *_background1;
 @property (atomic) CCSprite *_background2;
 @property (atomic) CCSprite *_topBackground;

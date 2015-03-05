@@ -14,6 +14,7 @@
 }
 
 @synthesize _ground;
+@synthesize _ceiling;
 @synthesize _background1;
 @synthesize _background2;
 @synthesize _topBackground;
@@ -31,10 +32,11 @@
     _screenHeight = [[UIScreen mainScreen] bounds].size.width;
     
     // Create the sprites
+    [self createGroundSprite];
+    [self createCeilingSprite];
     [self createBackgroundSprite];
     [self createTopBackgroundSprite];
-    [self createGroundSprite];
-        
+    
     return self;
 }
 
@@ -44,14 +46,26 @@
 -(void)createGroundSprite {
     _ground = [CCSprite spriteWithImageNamed:@"pd_ground.png"];
     _ground.anchorPoint = CGPointZero;
-    _ground.position = ccp(0, 20);
+    _ground.position = ccp(0, -10);
     _ground.physicsBody = [CCPhysicsBody bodyWithRect:(CGRect){CGPointZero, _ground.contentSize} cornerRadius:0];
     _ground.physicsBody.type = CCPhysicsBodyTypeStatic;
-    _ground.physicsBody.collisionType = @"groundCollision";
+    _ground.physicsBody.collisionType = @"hellCollision";
     _ground.physicsBody.friction=0.0f;
     _ground.scaleX = 1.2;
     
     [self addChild:_ground];
+}
+-(void)createCeilingSprite {
+    _ceiling = [CCSprite spriteWithImageNamed:@"pd_ground.png"];
+    _ceiling.anchorPoint = CGPointZero;
+    _ceiling.position = ccp(0, 0);
+    _ceiling.physicsBody = [CCPhysicsBody bodyWithRect:(CGRect){CGPointZero, _ceiling.contentSize} cornerRadius:0];
+    _ceiling.physicsBody.type = CCPhysicsBodyTypeStatic;
+    _ceiling.physicsBody.collisionType = @"ceilingCollision";
+    _ceiling.physicsBody.friction=0.0f;
+    _ceiling.scaleX = 1.2;
+    
+    [self addChild:_ceiling];
 }
 
 -(void)createBackgroundSprite {
@@ -60,20 +74,20 @@
     _background1.position = CGPointZero;
     _background1.physicsBody.friction=0.0f;
     /*
-    CCLabelTTF *label = [CCLabelTTF labelWithString:@"Bg1" fontName:@"Verdana-Bold" fontSize:15];
-    label.positionType = CCPositionTypeNormalized;
-    label.position = ccp(0.5f, 0.5f);
-    [_background1 addChild:label];
-    */
+     CCLabelTTF *label = [CCLabelTTF labelWithString:@"Bg1" fontName:@"Verdana-Bold" fontSize:15];
+     label.positionType = CCPositionTypeNormalized;
+     label.position = ccp(0.5f, 0.5f);
+     [_background1 addChild:label];
+     */
     _background2 = [CCSprite spriteWithImageNamed:@"backgroundGameSceneFinalThree.png"];
     _background2.anchorPoint = CGPointZero;
     _background2.position = ccp(_background1.contentSize.width-1, 0);
     _background2.physicsBody.friction=0.0f;
     /*
-    CCLabelTTF *label2 = [CCLabelTTF labelWithString:@"Bg2" fontName:@"Verdana-Bold" fontSize:15];
-    label2.positionType = CCPositionTypeNormalized;
-    label2.position = ccp(0.5f, 0.5f);
-    [_background2 addChild:label2];
+     CCLabelTTF *label2 = [CCLabelTTF labelWithString:@"Bg2" fontName:@"Verdana-Bold" fontSize:15];
+     label2.positionType = CCPositionTypeNormalized;
+     label2.position = ccp(0.5f, 0.5f);
+     [_background2 addChild:label2];
      */
     
     [self addChild:_background1];
