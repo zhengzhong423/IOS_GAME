@@ -772,12 +772,12 @@
 -(BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair robotCollision:(CCNode *)robot groundCollision:(CCNode *)ground
 {
     _robot.physicsBody.friction=0.0f;
-    ground.physicsBody.friction=0.0f;
+    
     
     if( _isGameOver )
         return YES;
 
-    if (_robot.position.y<ground.position.y || _isBoostOn) {
+    if (robot.position.y<ground.position.y + robot.boundingBox.size.height/2 || _isBoostOn) {
         return NO;
     }
     touches=0;
@@ -1012,13 +1012,11 @@
             [_robot.physicsBody applyForce:ccp(0,15.0f)];
             return;
         }
-        if (touches>=3)
+        else if (touches>=3)
         {
-            if(_coinProgressBar.percentage >= 3.0f) {
-            
-          
-                _isFly=TRUE;
-            
+            if(_coinProgressBar.percentage >= 3.0f)
+            {
+            _isFly=TRUE;
             CGFloat px = _robot.position.x;
             CGFloat py = _robot.position.y;
             _robot.physicsBody.velocity=ccp(0.0f, 0.0f);
@@ -1028,10 +1026,10 @@
             _robot.position = ccp(px, py);
             _robot.physicsBody.collisionGroup = @"robotGroup";
             _robot.physicsBody.collisionType = @"robotCollision";
-            
             [_physicsWorld addChild:_robot z:1];
             [self schedule:@selector(applyForceWhenTouched) interval:1.0f/10.0f];
-            return;
+            
+                return;
             }
             else
                 return;
