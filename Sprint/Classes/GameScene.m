@@ -87,6 +87,15 @@
     //count touch
     int touches;
     int preY;
+    
+    //Variables about random bridges
+    int lengthScaleMin;
+    int lengthScaleMax;
+    int distanceUnit;
+    int distanceMin;
+    int distanceMax;
+    int lastHeight;
+    int heightOffset;
 }
 
 // -----------------------------------------------------------------------
@@ -118,6 +127,13 @@
     _record = (int)[_userDefault integerForKey:@"record"];
     _targetScene = _record/100;
 
+    //Initialize variables for flying bridges generation
+    lengthScaleMin = 8;
+    lengthScaleMax = 10;
+    distanceMin = 0;
+    distanceMax = 20;
+    lastHeight = 20;
+    heightOffset = 1;
     
     //Create the physics world
     [self createPhysicsWorld];
@@ -160,6 +176,12 @@
     
     //Initialize ground and ceiling position
     _groundInitialY = 20;
+    
+    //Update distance between two bridges
+    distanceMin = distanceUnit;
+    distanceMax = distanceUnit + 1;
+    lastHeight = _background._background1.contentSize.height * 0.3;
+    distanceUnit = [_robot boundingBox].size.width;
     
     //[self boost];
     
@@ -214,7 +236,7 @@
     _physicsWorld = [CCPhysicsNode node];
 
     _physicsWorld.gravity = ccp(0, -500.0f);
-    _physicsWorld.debugDraw = YES;
+    _physicsWorld.debugDraw = NO;
     _physicsWorld.collisionDelegate = self;
     [self addChild:_physicsWorld];
 }
@@ -454,11 +476,13 @@
     _coinProgressBar.position = ccp(0.15f, 0.84f);
     _coinProgressBar.name = @"coinProgressBar";
     [self addChild:_coinProgressBar z:0];
+    _coinProgressBar.percentage = 100.0f;
     
     CCSprite *border = [CCSprite spriteWithImageNamed:@"progressBarFrame.png"];
     border.position = ccp(0, 0);
     border.anchorPoint = ccp(0.15, 0.35);
     [_coinProgressBar addChild:border z:9];
+    _coinProgressBar.percentage = 100.0f;
 
     /*
     CCSpriteFrame *progressBarFrame = [CCSpriteFrame frameWithImageNamed:@"progressBarFrame.png"];
@@ -485,8 +509,10 @@
     
     _robot.rotation=0.0f;
     
-    if(_isFly)
+    if(_isFly) {
         _coinProgressBar.percentage-=0.5f;
+        _isCoinProgressFull = NO;
+    }
     
     if(_coinProgressBar.percentage<=0.0f)
     {
@@ -529,7 +555,7 @@
     }
     
     if (!_isBoostOn && !_isPortalOn && !_isGameOver ) {
-        _scrollSpeed += 0.004;
+        _scrollSpeed += 0.0004;
     }
   
 
@@ -602,6 +628,7 @@
     
 }
 -(void)screenShake {
+    AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
     CCActionMoveBy *moveBy = [CCActionMoveBy actionWithDuration:0.05f position:ccp(-5, 5)];
     CCActionInterval *reverseMovement = [moveBy reverse];
     CCActionSequence *shakeSequence = [CCActionSequence actionWithArray:@[moveBy, reverseMovement,moveBy,reverseMovement,moveBy,reverseMovement,moveBy, reverseMovement,moveBy,reverseMovement,moveBy,reverseMovement]];
@@ -675,51 +702,51 @@
 #pragma mark - Collision Handler
 // -----------------------------------------------------------------------
 -(BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair robotCollision:(CCNode *)robot missileCollision:(CCNode *)missile {
-    if(_isRushOn || _isBoostOn)
-        return NO;
-    if (!strcmp([missile.name UTF8String] , "goldenMissile")) {
-        CCAction *actionFall = [CCActionMoveTo actionWithDuration:0.5 position:CGPointMake(missile.position.x, 20)];
-        CCAction *actionFallRemove = [CCActionRemove action];
-        [_robot.physicsBody applyImpulse:ccp(0, 0.2f)];
-        missile.physicsBody.allowsRotation = YES;
-        [missile runAction:[CCActionSequence actionWithArray:@[actionFall,actionFallRemove]]];
-        
-        [self boost];
-        
-        return NO;
-    }
+//    if(_isRushOn || _isBoostOn)
+//        return NO;
+//    if (!strcmp([missile.name UTF8String] , "goldenMissile")) {
+//        CCAction *actionFall = [CCActionMoveTo actionWithDuration:0.5 position:CGPointMake(missile.position.x, 20)];
+//        CCAction *actionFallRemove = [CCActionRemove action];
+//        [_robot.physicsBody applyImpulse:ccp(0, 0.2f)];
+//        missile.physicsBody.allowsRotation = YES;
+//        [missile runAction:[CCActionSequence actionWithArray:@[actionFall,actionFallRemove]]];
+//        
+//        [self boost];
+//        
+//        return NO;
+//    }
     
     [missile removeFromParentAndCleanup:YES];
-    if (_isBoostOn) {
+    if (_isRushOn || _isBoostOn) {
         [self screenShake];
         return NO;
     }
-    else if (_isShieldOn) {
-        [self loseShield];
-        return NO;
-    }
-    else if (_goldenShieldLevel > 0) {
-        _goldenShieldLevel--;
-        //[_robot getChildByName:@"goldenShield" recursively:NO].opacity -= 0.3;
-        
-        if (_goldenShieldLevel == 0) {
-            [self loseShield];
-        }
-        return NO;
-    }
+//    else if (_isShieldOn) {
+//        [self loseShield];
+//        return NO;
+//    }
+//    else if (_goldenShieldLevel > 0) {
+//        _goldenShieldLevel--;
+//        //[_robot getChildByName:@"goldenShield" recursively:NO].opacity -= 0.3;
+//        
+//        if (_goldenShieldLevel == 0) {
+//            [self loseShield];
+//        }
+//        return NO;
+//    }
     else {
-        // Sound effect
-        OALSimpleAudio *audio = [OALSimpleAudio sharedInstance];
-        [audio playEffect:@"Explosion.wav"];
-        
-        CGFloat x = robot.position.x;
-        CGFloat y = robot.position.y;
-        [_robot removeFromParentAndCleanup:YES];
-        [self addRobotshoted: x andNb: y];
-        [missile removeFromParent];
-        
-        [_userDefault setObject:[NSString stringWithFormat:@"%d", _distance] forKey:@"distance"];
-        [_userDefault synchronize];
+//        // Sound effect
+//        OALSimpleAudio *audio = [OALSimpleAudio sharedInstance];
+//        [audio playEffect:@"Explosion.wav"];
+//        
+//        CGFloat x = robot.position.x;
+//        CGFloat y = robot.position.y;
+//        [_robot removeFromParentAndCleanup:YES];
+//        [self addRobotshoted: x andNb: y];
+//        [missile removeFromParent];
+//        
+//        [_userDefault setObject:[NSString stringWithFormat:@"%d", _distance] forKey:@"distance"];
+//        [_userDefault synchronize];
 
         [self died];
         return YES;
@@ -773,11 +800,11 @@
 {
     _robot.physicsBody.friction=0.0f;
     
-    
+    [self unschedule:@selector(applyForceWhenTouched)];
     if( _isGameOver )
         return YES;
 
-    if (robot.position.y<ground.position.y + robot.boundingBox.size.height/2 || _isBoostOn) {
+    if (robot.position.y<ground.position.y || _isBoostOn) {
         return NO;
     }
     touches=0;
@@ -820,9 +847,11 @@
 
 -(BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair robotCollision:(CCNode *)robot boostCollision:(CCNode *)boost{
     if (!_isBoostOn) {
+        [self unschedule:@selector(applyForceWhenTouched)];
+        [boost removeFromParentAndCleanup:YES];
         [self boost];
     }
-    [boost removeFromParentAndCleanup:YES];
+    
     return NO;
 }
 
@@ -903,6 +932,7 @@
     if (!_isBoostOn) {
         [self boost];
     }
+    [self unschedule:@selector(applyForceWhenTouched)];
     [boost removeFromParentAndCleanup:YES];
     return NO;
 }
@@ -995,6 +1025,7 @@
             if(_coinProgressBar.percentage>=10.0f)
             {
                 _coinProgressBar.percentage-=10.0f;
+                _isCoinProgressFull = NO;
                 _robot.physicsBody.affectedByGravity=NO;
                 _robot.physicsBody.velocity=ccp(0.0f, 0.0f);
                 [self rush];
@@ -1359,6 +1390,7 @@
     
     if (_coinProgressBar.percentage >= 100.0/3.0) {
         _coinProgressBar.percentage -= 100.0/3.0;
+        _isCoinProgressFull = NO;
         _numOfCoins -= 50;
         [((CCLabelTTF*)[self getChildByName:@"labelCoin" recursively:NO]) setString:[NSString stringWithFormat:@"Coin: %d", _numOfCoins]];
         
@@ -1400,6 +1432,7 @@
     }
     else if (_coinProgressBar.percentage >= 100.0/3.0) {
         _coinProgressBar.percentage -= 100.0/3.0;
+        _isCoinProgressFull = NO;
         _numOfCoins -= 50;
         [((CCLabelTTF*)[self getChildByName:@"labelCoin" recursively:NO]) setString:[NSString stringWithFormat:@"Coin: %d", _numOfCoins]];
         
@@ -1566,6 +1599,8 @@
     // Set distance function
     [self calculateDistacne];
     
+    [self updateRandomGenerator];
+    
     if (_isInvulnerable) {
         _robot.physicsBody.collisionType = @"superRobotCollision";
     }
@@ -1586,7 +1621,7 @@
     if (_isBoostOn) {
         _boostTime++;
         // Boost effect last for 8 seconds
-        if (_boostTime == 80) {
+        if (_boostTime == 30) {
             _robot.scale = 1.0;
             _isBoostOn = NO;
             touches=0;
@@ -1635,6 +1670,45 @@
         _distance = 100 * (_sceneCounter - _background._background2.position.x/_background._background2.contentSize.width);
     
     [(CCLabelTTF*)[self getChildByName:@"labelDistance" recursively:NO] setString:[NSString stringWithFormat:@"Metres: %d M", _distance]];
+}
+
+-(void)updateRandomGenerator {
+    int distance = _distance;
+    if(distance == 200) {
+        lengthScaleMin = 6;
+        lengthScaleMax = 10;
+        distanceMin = distanceUnit;
+        distanceMax = distanceUnit * 2;
+        heightOffset = 10;
+    }
+    else if(distance == 400) {
+        lengthScaleMin = 5;
+        lengthScaleMax = 9;
+        distanceMin = distanceUnit;
+        distanceMax = distanceUnit * 3;
+        heightOffset = 20;
+    }
+    else if(distance == 600) {
+        lengthScaleMin = 4;
+        lengthScaleMax = 8;
+        distanceMin = distanceUnit;
+        distanceMax = distanceUnit * 3;
+        heightOffset = 30;
+    }
+    else if(distance == 1000) {
+        lengthScaleMin = 3;
+        lengthScaleMax = 7;
+        distanceMin = distanceUnit;
+        distanceMax = distanceUnit * 3;
+        heightOffset = 40;
+    }
+    else if(distance == 1500) {
+        lengthScaleMin = 2;
+        lengthScaleMax = 5;
+        distanceMin = distanceUnit;
+        distanceMax = distanceUnit * 3;
+        heightOffset = 50;
+    }
 }
 
 -(void)applyForceWhenTouched {
@@ -1708,20 +1782,20 @@
     while (counter < bg.contentSize.width - 1) {
         CCSprite *spr = [Background generateFlyingGround];
         
-        int lengthScaleMin = 3;
-        int lengthScaleMax = 8;
-        int distanceMin = 10;
-        int distanceMax = 100;
+        //int lengthScaleMin = 3;
+        //int lengthScaleMax = 8;
+        //int distanceMin = 10;
+        //int distanceMax = 100;
         
-        float randomScale = arc4random() % (lengthScaleMax - lengthScaleMin) + lengthScaleMin;
+        //float randomScale = [self generateRandomScale];
         float randomDistance = arc4random() % (distanceMax - distanceMin) + distanceMin;
         
         spr.scaleY = 0.5;
-        spr.scaleX = randomScale/10.0;
+        spr.scaleX = (arc4random() % (lengthScaleMax - lengthScaleMin) + lengthScaleMin)/10.0;
         //CCLOG(@"++++++++++++++%lu",(unsigned long)randomScale);
         int x = counter;
-        int minY = bg.contentSize.height * 0.1;
-        int maxY = bg.contentSize.height * 0.5;
+        int minY = lastHeight - heightOffset;
+        int maxY = lastHeight + heightOffset;
         int randomY = arc4random()%(maxY-minY)+minY;
         spr.position = ccp(x,randomY);
         counter += [spr boundingBox].size.width + randomDistance;
@@ -1745,6 +1819,7 @@
         spr.scaleY = 0.5;
         int x = counter;
         spr.position = ccp(x,bg.contentSize.height * 0.3);
+        lastHeight = bg.contentSize.height * 0.3;
         [bg addChild:spr];
         counter += [spr boundingBox].size.width;
         //CCLOG(@"++++++++++++++%lu",(unsigned long)bg.children.count);
@@ -2045,17 +2120,50 @@
 
 -(void)generateRiskAndRewards : (CCSprite*)bg {
     CCSprite *spr;
-    //if (arc4random()%2 == 1) {
-        spr = [Rewards threeStarsInit];
-    //}
-    //else {
-        //spr = [Rewards threeStarsReverseInit];
-    //}
+    float pb_object = arc4random()%100/100.0f;
+    
+    if (pb_object <= 0.20f) {
+        spr = [Rewards LineShapeStars];
+    }
+    else if (pb_object <= 0.40f) {
+        spr = [Rewards RectShapeStars];
+    }
+    else if (pb_object <= 0.60f) {
+        spr = [Rewards DiamondShapeStars];
+    }
+    else if (pb_object <= 0.80f) {
+        spr = [Rewards HeartShapeStars];
+    }
+    else {
+        spr = [Rewards USCShapeStars];
+    }
+    
+    /*else if (pb_object <= 0.22f) {
+     spr = [Coin initCoinGroup:COIN_SHAPE_HEART];
+     }
+     else if (pb_object <= 0.26f) {
+     spr = [Coin initCoinGroup:COIN_SHAPE_USC];
+     }
+     else {
+     spr = [Coin initCoinGroup:COIN_SHAPE_Z];*/
+    
+    
+    /*if (arc4random()%2 == 1) {
+     spr = [Rewards LineShapeStars];
+     }
+     else {
+     spr = [Rewards RectShapeStars];
+     }*/
     //spr = [Rewards threeStarsReverseInit];
     int minX = bg.contentSize.width*.2;
     int maxX = bg.contentSize.width*.8 - spr.contentSize.width;
     int randomX = arc4random()%(maxX-minX) + minX;
-    spr.position = ccp(randomX, [self generateRandomY:spr]);
+    
+    int minY = bg.contentSize.height*.4;
+    int maxY = bg.contentSize.height*.5 - spr.contentSize.height*.5;
+    int randomY = arc4random()%(maxY-minY) + minY;
+    
+    spr.position = ccp(randomX, randomY/*[self generateRandomY:spr]*/);
     [bg addChild:spr];
 }
 

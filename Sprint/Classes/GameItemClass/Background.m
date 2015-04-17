@@ -32,7 +32,7 @@
     _screenHeight = [[UIScreen mainScreen] bounds].size.width;
     
     // Create the sprites
-//    [self createGroundSprite];
+    [self createGroundSprite];
     [self createCeilingSprite];
     [self createBackgroundSprite];
     [self createTopBackgroundSprite];

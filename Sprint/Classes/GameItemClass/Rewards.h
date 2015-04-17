@@ -15,7 +15,13 @@
 +(CCSprite*)magnetInit;
 +(CCSprite*)boostInit;
 +(CCSprite*)starInit;
-+(CCSprite*)threeStarsInit;
-+(CCSprite*)threeStarsReverseInit;
++(CCSprite*)coinsInit;
++(CCSprite*)bluediamondInit;
++(CCSprite*)LineShapeStars;
++(CCSprite*)RectShapeStars;
++(CCSprite*)DiamondShapeStars;
++(CCSprite*)HeartShapeStars;
++(CCSprite*)USCShapeStars;
+
 
 @end
